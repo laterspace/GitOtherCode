@@ -1,0 +1,14 @@
+public class A 
+{
+	B b =new B();
+int a = b.size;
+	public static void main(String[] args) 
+	{
+		System.out.println(a);
+	}
+}
+
+public class B
+{
+	int size;
+}

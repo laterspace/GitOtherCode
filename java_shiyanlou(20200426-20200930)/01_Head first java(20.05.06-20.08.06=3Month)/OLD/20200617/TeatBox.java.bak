@@ -1,0 +1,18 @@
+public class TeatBox  
+{
+	Integer i;
+	int j;
+	
+	public static void main(String[] args) 
+	{
+		TestBox t =new TestBox()
+	}
+
+	public void go(){
+	j=i;
+	System.out.println(j);
+	System.out.println(i);
+	}
+
+
+}

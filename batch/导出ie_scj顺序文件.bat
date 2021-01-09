@@ -1,0 +1,1 @@
+REG EXPORT HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Favorites\Links C:\iescj.reg

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="GBK">
+	<!--<meta charset="UTF-8">-->
+	<title>Document</title>
+	<script src="./jquery-2.0.0.js"></script>
+    <script src="./FileSaver.js"></script>
+    <script src="./jquery.wordexport.js"></script>
+    <!-- 这三个文件在非ie浏览器下用到 -->
+</head>
+<body>
+	<html>
+    <HEAD>
+        <title>WEB页面导出为Word文档后分页的方法 </title>
+    </HEAD>
+    <body>
+        <BR>
+        <div id="test">
+            <h2>hahha</h2>
+            ^
+            bbb
+            ^
+            ccc
+        </div>
+        <div id="test2">
+            <h2>hahha</h2>
+            bbb
+            ccc
+        </div>
+        <input id="btn" type="button" value="导出页面指定区域内容到Word"/>
+    </body>
+     <script>
+         /**//*
+                 * 
+                 * @param {Object} cont  要导出的html元素内容的id,注意不要加双引号
+                 * @param {Object} key   分页关键字
+                 */
+                function AllAreaWord(cont,key)
+                {
+                    var oWD = new ActiveXObject("Word.Application");
+                    //默认为页面视图
+                    var oDC = oWD.Documents.Add("", 0, 0);
+                    var oRange = oDC.Range(0, 1);
+                    //var oRange1 = oDC.Range(0,2);
+                    var sel = document.body.createTextRange();
+                    //参数为html元素id 
+                    sel.moveToElementText(cont);
+                    sel.select();
+                    sel.execCommand("Copy");
+                    oRange.Paste();
+                    oWD.Application.Visible = true;
+                    //得到打开后word的selection对象
+                    var selection = oWD.Selection;
+                    //设置字体大小
+                    selection.Font.Size = 10;
+                    //ctrl+A 全选操作
+                    selection.WholeStory();
+                    //清除格式
+                    selection.Find.ClearFormatting();
+                    //指定查找关键字
+                    selection.Find.Text = key;
+                    //^m为手动分页符标记
+                    //向下查找
+                    selection.Find.Forward = true;
+                    selection.Find.Wrap = 1;
+                    //不区分大小写
+                    selection.Find.MatchCase = false;
+                    //不匹配整个单词
+                    selection.Find.MatchWholeWord = false;
+                    //如果找到指定字符串返回真,否则返回false
+                    while (selection.Find.Execute()) 
+                    {
+                        //插入分页符,分页符常量为7,具体可查word api
+                        selection.InsertBreak(7);
+                    }
+                }
+                var btn = document.getElementById('btn')
+                 if (!!window.ActiveXObject || "ActiveXObject" in window){
+                    btn.onclick = function(){
+                        AllAreaWord(document.getElementById('test'),'^')
+                    }
+                 }else{
+                    btn.onclick = function(){
+                        $("#test2").wordExport("客户评价");
+                    }
+                 }
+
+
+
+    </script>
+</html> 	
+</body>
+</html>

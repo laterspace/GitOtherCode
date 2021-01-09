@@ -1,0 +1,15 @@
+import java.rmi.*;
+
+public class MyRemoteImp1 extends {
+	
+
+
+	public static void main(String[] args){
+
+		
+
+	}	//	Close main
+
+	
+
+}	//	Close class

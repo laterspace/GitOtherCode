@@ -1,0 +1,27 @@
+import java.rmi.*;
+
+public class MyRemoteClient {
+	
+
+
+	public static void main(String[] args){
+
+	new MyRemoteClient().go();	
+
+	}	//	Close main
+	
+	public void go(){
+		
+		try{
+			MyRemote service=(MyRemote) Naming.lookup("rmi://127.0.0.1/Remote Hello");
+			
+			String  s =service.sayHello();
+			
+			System.out.println(s);
+		} catch (Exception ex){ex.printStackTrace();}
+		
+		
+	}
+	
+
+}	//	Close class
